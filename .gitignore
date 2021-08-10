@@ -1,0 +1,15 @@
+# Ignorar todas las carpetas
+autoload
+bkup-pack
+plugged
+prueba
+session
+
+# Ignorar archivos 
+initVimYT
+
+# Ignorar carpetas enlazadas
+.vim
+
+# Ignorar archivos enlazados
+.zshrc
