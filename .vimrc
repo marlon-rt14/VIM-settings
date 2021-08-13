@@ -12,6 +12,7 @@ set sw=4
 set relativenumber
 set laststatus=2
 set noshowmode
+" set showtabline=2
 
 call plug#begin('~/.vim/plugged')
 
@@ -27,13 +28,32 @@ Plug 'scrooloose/nerdtree'
 " Navegar entre archivos abiertos
 Plug 'christoomey/vim-tmux-navigator'
 
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+Plug 'tomasr/molokai'
+" Plug 'sonph/onehalf'
+
 call plug#end()
 
 " gruvbox
-colorscheme gruvbox
-let g:gruvbox_contrast_dark = "hard"
+
+colorscheme molokai
+" let g:gruvbox_contrast_dark = "hard"
 " let g:deoplete#enable_at_startup = 1
 " let g:jsx_ext_required = 0
+
+" Airline Setup {{{
+  let g:airline_theme='wombat'
+  let g:airline#extensions#tabline#enabled = 1 "Show tabs if only one is enabled.
+  let g:airline#extensions#tabline#show_splits = 1 "enable/disable displaying open splits per tab (only when tabs are opened). >
+  let g:airline#extensions#tabline#show_buffers = 1 " enable/disable displaying buffers with a single tab
+  let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
+  let g:airline#extensions#tabline#formatter = 'unique_tail'
+  let g:airline#extensions#tabline#switch_buffers_and_tabs = 1
+  let g:airline_powerline_fonts = 1
+" }}}
+
 
 let mapleader=" "
 
@@ -56,19 +76,20 @@ nmap <Leader>l :ls<CR>
 " Eliminar buffer
 nmap <Leader>n :bnext<CR>
 nmap <Leader>p :bprev<CR>
-nmap <Leader>d :bdelete<CR>
+nmap <Leader>bd :bdelete<CR>
 
-imap { {}<left>
-imap {{ {
+imap { {}<left><CR><CR><up><TAB>
+" imap {{ {
 imap [ []<left>
-imap [[ [
+" imap [[ [
 imap ( ()<left>
-imap (( (
+" imap (( (
 " imap < </><left>
 " imap << <
 
-"Saltar una linea abajo sin separar la linea actual: ctrl + enter
-imap <Char-13> <C-o>o
+"Saltar una linea abajo sin separar la linea actual: shift + m 
+" imap <S-M> <C-o>o
+
 
 " Suprimir una palabra adelante desde el cursor con: ctrl + spr
 imap <C-Del> <C-o>dw
@@ -76,5 +97,5 @@ imap <C-Del> <C-o>dw
 " Eliminar una palabra haca atras desde el cursor con: ctrl + del
 imap <Char-8> <C-o>db
 
-
+imap <C-L> <C-o>2l
 
