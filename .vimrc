@@ -42,6 +42,8 @@ Plug 'neovim/nvim-lspconfig'
 
 Plug 'simeji/winresizer'
 
+Plug 'mg979/vim-visual-multi'
+
 call plug#end()
 
 " gruvbox
@@ -169,3 +171,5 @@ imap <Char-8> <C-o>db
 "Saltar una linea abajo sin separar la linea actual: shift + m 
 imap <C-L> <C-o>o
 
+inoremap <div<Char-62> <div></div><left><left><left><left><left><left>
+inoremap <div<Char-62><Char-62> <div><CR></div><ESC>O
