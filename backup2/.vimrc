@@ -18,11 +18,7 @@ set noshowmode
 set autoindent
 set cindent
 set smartindent
-
 set termguicolors
-set t_Co=256
-" set background=dark
-highlight Normal guibg=Black
 " set guioptions-=r
 " set showtabline=2
 
@@ -32,10 +28,7 @@ call plug#begin('~/.vim/plugged')
 " Plug 'tomasr/molokai'
 Plug 'dracula/vim'
 Plug 'nanotech/jellybeans.vim'
-Plug 'ayu-theme/ayu-vim' 
-Plug 'zacanger/angr.vim'
-Plug 'danilo-augusto/vim-afterglow'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'ayu-theme/ayu-vim'
 " { wombat, 
     " Plug 'flazz/vim-colorschemes'
     " Plug 'mhartington/oceanic-next'
@@ -54,18 +47,16 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'vim-airline/vim-airline'
 " Plug 'vim-airline/vim-airline-themes'
 
-" Ident lines"
-Plug 'Yggdroot/indentLine' 
+
+Plug 'neovim/nvim-lspconfig'
 
 Plug 'simeji/winresizer'
 
-Plug 'terryma/vim-multiple-cursors'
+Plug 'mg979/vim-visual-multi'
 
 Plug 'mattn/emmet-vim'
 
 call plug#end()
-
-let mapleader=" "
 
 " CONFIGURAR TEMAS
 colorscheme ayu
@@ -77,24 +68,6 @@ colorscheme ayu
 
 " AYU"
 let ayucolor='dark'
-
-" Afterglow"
-" let g:airline_theme='afterglow'
-" let g:afterglow_blackout=1
-" let g:afterglow_inherit_background=1
-
-" Ident Line Setup {{{"
-    " let g:indentLine_setColors = 0
-    " Vim and GVim
-    let g:indentLine_char = '│'
-    " GVim
-    let g:indentLine_color_gui = '#555555'
-    " let g:indentLine_bgcolor_gui = '#FF5F00'
-" }}}
-
-" vim-multiple-cursors (multi cursor){{{"
-
-" }}}
 
 " Airline Setup {{{
   " let g:airline_theme='tomorrow'
@@ -111,6 +84,7 @@ let ayucolor='dark'
 " }}}
 
 
+let mapleader=" "
 
 " easymotion
 nmap <Leader>s <Plug>(easymotion-s2)
@@ -124,16 +98,9 @@ nmap <Leader>w :w<CR>
 nmap <Leader>q :q<CR>
 nmap <Leader>qq :q!<CR>
 nmap <Leader>wq :wq<CR>
-" Buffers
-nmap <Leader>n :bnext<CR>
-nmap <Leader>bb :buffers<CR>
-nmap <Leader>x :buffer
-nmap <Leader>p :bprev<CR>
-nmap <Leader>bd :bdelete<CR>
-nmap <Leader>l :ls<CR>
 
 "   Redimensionar ventanas
-nmap <Leader>wr :WinResizerStartResize<CR>
+nmap <Leader>r :WinResizerStartResize<CR>
 let g:winresizer_horiz_resize = 1
 let g:winresizer_vert_resize = 1
 let g:winresizer_start_key = '<C-R>'
@@ -142,6 +109,12 @@ let g:winresizer_start_key = '<C-R>'
 let g:user_emmet_leader_key='<C-Z>,'
 let g:user_emmet_install_global = 1
 let g:user_emmet_mode='a'
+
+" Buffers
+nmap <Leader>n :bnext<CR>
+nmap <Leader>p :bprev<CR>
+nmap <Leader>bd :bdelete<CR>
+nmap <Leader>l :ls<CR>
 
 "-- AUTOCLOSE --  
 "autoclose and position cursor to write text inside  
@@ -214,13 +187,10 @@ inoremap {,<CR> {<CR>},<ESC>O
 imap <C-Del> <C-o>dw
 
 " Eliminar una palabra hacia atras desde el cursor con: ctrl + del
-imap <Char-8> <ESC>db i
+imap <Char-8> <C-o>db
 
 "Saltar una linea abajo sin separar la linea actual: shift + m 
 imap <C-L> <C-o>o
-
-"Duplicar la lina actual"
-nmap <Leader>d :t.<CR>
 
 inoremap <div<Char-62> <div></div><left><left><left><left><left><left>
 inoremap <div<Char-62><Char-62> <div><CR></div><ESC>O
