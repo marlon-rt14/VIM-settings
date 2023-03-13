@@ -1,0 +1,275 @@
+set number
+set mouse=a
+set numberwidth=1
+set clipboard=unnamed
+syntax enable
+set showcmd
+set ruler
+set cursorline
+set encoding=utf-8
+set showmatch
+set sw=2
+set relativenumber
+set laststatus=2
+set noshowmode
+set autoindent
+set cindent
+set smartindent
+set splitright
+set splitbelow
+set tabline=%<%t\ %h%m%r%=%D(%l/%L,%c%V) "habilitar pestanias"
+
+set termguicolors
+set t_Co=256
+set guioptions=a
+hi Normal ctermbg=none guibg=none
+
+"set background=dark
+"highlight Normal guibg=Black
+"set guioptions-=r
+" set showtabline=2
+
+call plug#begin('~/.vim/plugged')
+
+"Autocomplete"
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" Themes
+" Plug 'tomasr/molokai'
+Plug 'dracula/vim'
+Plug 'nanotech/jellybeans.vim'
+Plug 'ayu-theme/ayu-vim' 
+Plug 'danilo-augusto/vim-afterglow'
+
+" IDE
+Plug 'easymotion/vim-easymotion'
+
+" NerdTree
+Plug 'scrooloose/nerdtree'
+
+" Navegar entre archivos abiertos
+Plug 'christoomey/vim-tmux-navigator'
+
+"####################################################################"
+"Busca archivos"
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" Ident lines"
+Plug 'Yggdroot/indentLine' 
+
+Plug 'simeji/winresizer'
+
+"Mutli cursor"
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+
+"Crear etiquetas html con atajos"
+Plug 'mattn/emmet-vim'
+
+call plug#end()
+
+let mapleader=" "
+
+" CONFIGURAR TEMAS
+" # AYU 
+colorscheme ayu
+let ayucolor='dark'
+
+" # afterglow
+"colorscheme afterglow
+"let g:airline_theme = 'afterglow'
+"$ Usar esta opcion si el entorno como una oficina causa deslumbramiento, esta
+"$ opcion no funcionara si g:inherit_background esta activado"
+"let g:afterglow_blackout=1
+"let g:afterglow_inherit_background=1
+"let g:afterglow_italic_comments=1
+
+" Ident Line Setup
+" let g:indentLine_setColors = 0
+" Vim and GVim
+let g:indentLine_char = '│'
+let g:indentLine_color_gui = '#555555'
+" let g:indentLine_bgcolor_gui = '#FF5F00'
+
+
+"vim airline
+let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#left_sep = ' '
+"let g:airline#extensions#tabline#left_alt_sep = '|'
+"let g:airline_section_z = ''
+"let g:airline_section_y = ''
+" Personalizar la sección Z de la barra de estado
+let g:airline_section_z = '% l/%L:%c'
+let g:airline_section_z_padding = 2
+"let g:airline_section_y = expand("%:e")
+let g:airline_section_y = '%{strftime("%H:%M")}'
+"behelit bubblegum kolor "
+let g:airline_theme='kolor'
+
+"Configuracion de pestanias"
+noremap <A-j> :tabprevious<CR>
+noremap <A-k> :tabnext<CR>
+noremap <A-f> :tabfirst<CR>
+noremap <A-l> :tablast<CR>
+noremap <A-w> :tabclose<CR>
+
+"terminal"
+noremap <Leader>t :terminal<CR>
+
+
+"Autocomplete custom KEY map Tabnine"
+inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+
+"FZF finder"
+noremap <C-P> :Files<CR>
+noremap <Leader>bl :BLines<CR>
+noremap <Leader>rg :Rg<CR>
+
+" easymotion
+nmap <Leader>s <Plug>(easymotion-s2)
+
+" NerdTree
+nmap <Leader>nt :NERDTreeFind<CR> 
+let NERDTreeQuitOnOpen=1
+let NERDTreeShowHidden=1
+
+
+" Atajos personalizados
+nmap <Leader>w :w<CR>
+nmap <Leader>q :q<CR>
+nmap <Leader>qq :q!<CR>
+nmap <Leader>wq :wq<CR>
+
+" Buffers
+nmap <Leader>n :bnext<CR>
+nmap <Leader>bb :buffers<CR>
+nmap <Leader>x :buffer
+nmap <Leader>p :bprev<CR>
+nmap <Leader>bd :bdelete<CR>
+nmap <Leader>l :ls<CR>
+
+"Activar tabnine"
+let g:coc_global_extensions = ['coc-tabnine'] 
+
+" Redimensionar ventanas
+nmap <Leader>wr :WinResizerStartResize<CR>
+let g:winresizer_horiz_resize = 1
+let g:winresizer_vert_resize = 1
+"let g:winresizer_start_key = '<C-R>'
+"nmap <C-w><C-r>wr :WinResizerStartResize<CR><CR>
+
+" emmet-vim
+let g:user_emmet_leader_key='<C-Z>'
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
+let g:user_emmet_mode='a'
+let g:user_emmet_settings = {
+\  'variables': {'lang': 'en'},
+\  'html': {
+\    'default_attributes': {
+\      'option': {'value': v:null},
+\      'textarea': {'id': v:null, 'name': v:null, 'cols': 10, 'rows': 10},
+\    },
+\    'snippets': { 
+\      'html:5': "<!DOCTYPE html>\n"
+\              ."<html lang=\"${lang}\">\n"
+\              ."<head>\n"
+\              ."\t<meta charset=\"${charset}\">\n"
+\	       ."\t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n"
+\              ."\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
+\              ."\t<title>Document</title>\n"
+\              ."</head>\n"
+\              ."<body>\n\t${child}|\n</body>\n"
+\              ."</html>",
+\    },
+\  },
+\}
+
+"Copiar al portapapeles desde nvim"
+vnoremap <C-Y> :'<,'>w !xclip -selection clipboard<CR>
+"vnoremap <C-Y> :'<,'>w !echo -n "\%V" | xclip -selection clipboard<CR>
+
+"-- AUTOCLOSE --  
+"autoclose and position cursor to write text inside  
+inoremap " ""<left>
+inoremap ' ''<left>
+inoremap ` ``<left>
+inoremap { {}<left>
+inoremap [ []<left>
+inoremap ( ()<left>
+"autoclose with ; and position cursor to write text inside  
+inoremap "; "";<left><left>
+inoremap '; '';<left><left>
+inoremap `; ``;<left><left>
+inoremap {; {};<left><left>
+inoremap [; [];<left><left>
+inoremap (; ();<left><left>
+"autoclose with , and position cursor to write text inside  
+inoremap ", "",<left><left>
+inoremap ', '',<left><left>
+inoremap `, ``,<left><left>
+inoremap {, {},<left><left>
+inoremap [, [],<left><left>
+inoremap (, (),<left><left>
+"autoclose and position cursor after  
+inoremap '<tab> ''  
+inoremap `<tab> ``  
+inoremap "<tab> ""
+inoremap (<tab> ()  
+inoremap [<tab> []  
+inoremap {<tab> {}  
+"autoclose with ; and position cursor after  
+inoremap ';<tab> '';  
+inoremap `;<tab> ``;  
+inoremap ";<tab> "";  
+inoremap (;<tab> ();  
+inoremap [;<tab> [];  
+inoremap {;<tab> {};  
+"autoclose with , and position cursor after  
+inoremap ',<tab> '',  
+inoremap `,<tab> ``,  
+inoremap ",<tab> "",
+inoremap (,<tab> (),  
+inoremap [,<tab> [],  
+inoremap {,<tab> {},  
+"autoclose 2 lines below and position cursor in the middle   
+inoremap '<CR> '<CR>'<ESC>O  
+inoremap `<CR> `<CR>`<ESC>O  
+inoremap "<CR> "<CR>"<ESC>O  
+inoremap (<CR> (<CR>)<ESC>O  
+inoremap [<CR> [<CR>]<ESC>O  
+inoremap {<CR> {<CR>}<ESC>O  
+"autoclose 2 lines below adding ; and position cursor in the middle   
+inoremap ';<CR> '<CR>';<ESC>O  
+inoremap `;<CR> `<CR>`;<ESC>O  
+inoremap ";<CR> "<CR>";<ESC>O  
+inoremap (;<CR> (<CR>);<ESC>O  
+inoremap [;<CR> [<CR>];<ESC>O  
+inoremap {;<CR> {<CR>};<ESC>O  
+"autoclose 2 lines below adding , and position cursor in the middle   
+inoremap ',<CR> '<CR>',<ESC>O  
+inoremap `,<CR> `<CR>`,<ESC>O  
+inoremap ",<CR> "<CR>",<ESC>O  
+inoremap (,<CR> (<CR>),<ESC>O  
+inoremap [,<CR> [<CR>],<ESC>O  
+inoremap {,<CR> {<CR>},<ESC>O
+
+
+
+" Suprimir una palabra adelante desde el cursor con: ctrl + spr
+inoremap <C-Del> <C-o>dw
+
+" Eliminar una palabra hacia atras desde el cursor con: ctrl + del
+inoremap <Char-8> <C-W>
+
+"Saltar una linea abajo sin separar la linea actual: shift + m 
+imap <C-L> <C-o>o
+
+"Duplicar la lina actual"
+nmap <Leader>d :t.<CR>
+
+"inoremap <div<Char-62> <div></div><left><left><left><left><left><left>
+"inoremap <div<Char-62><Char-62> <div><CR></div><ESC>O
