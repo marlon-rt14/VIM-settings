@@ -1,5 +1,3 @@
-
-
 set number
 set mouse=a
 set numberwidth=1
@@ -24,6 +22,10 @@ set tabline=%<%t\ %h%m%r%=%D(%l/%L,%c%V) "habilitar pestanias"
 set foldmethod=indent
 set foldlevelstart=99
 set foldcolumn=2
+"Guardar el collapso o vista de los archivos para que se vuelvan a abrir como
+"antes"
+autocmd BufWinLeave * mkview
+autocmd BufWinEnter * silent! loadview
 
 
 set termguicolors
@@ -43,10 +45,10 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Themes
 " Plug 'tomasr/molokai'
-Plug 'dracula/vim'
-Plug 'nanotech/jellybeans.vim'
-Plug 'ayu-theme/ayu-vim' 
-Plug 'danilo-augusto/vim-afterglow'
+" Plug 'dracula/vim'
+" Plug 'nanotech/jellybeans.vim'
+" Plug 'ayu-theme/ayu-vim' 
+" Plug 'danilo-augusto/vim-afterglow'
 Plug 'ray-x/aurora'
 "Plug 'ryanoasis/vim-devicons'
 
@@ -59,7 +61,13 @@ Plug 'scrooloose/nerdtree'
 " Navegar entre archivos abiertos
 Plug 'christoomey/vim-tmux-navigator'
 
+"CSS color"
+Plug 'ap/vim-css-color'
+
 "####################################################################"
+
+"surround"
+Plug 'tpope/vim-surround'
 
 "Busca archivos"
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -86,7 +94,8 @@ Plug 'tpope/vim-commentary'
 "Auto rename tag"
 Plug 'AndrewRadev/tagalong.vim'
 
-"plieges en bloques de codigo"
+"multiple terminal"
+Plug 'kassio/neoterm'
 
 "PLUGINS PARA REACTJS"
 "formatear e identar codigo"
@@ -100,6 +109,7 @@ Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
 
 call plug#end()
+
 
 
 let mapleader=" "
@@ -149,27 +159,40 @@ let g:airline_theme='kolor'
 "Configuracion de pestanias"
 noremap <A-j> :tabprevious<CR>
 noremap <A-k> :tabnext<CR>
-noremap <A-f> :tabfirst<CR>
+noremap <A-h> :tabfirst<CR>
 noremap <A-l> :tablast<CR>
 noremap <A-w> :tabclose<CR>
 
 "terminal"
-noremap <Leader>t :terminal<CR>
+" noremap <Leader>t :terminal<CR>
+noremap <Leader>t :Tnew<CR>
 
 "SnipMate deprecate"
- let g:snipMate = { 'snippet_version' : 1 }
+let g:snipMate = { 'snippet_version' : 1 }
 
 "vim-commentary"
 autocmd FileType javascript setlocal commentstring={/*\ %s\ */}
 autocmd FileType typescriptreact setlocal commentstring={/*\ %s\ */}
+vmap . <Plug>Commentary
 
 "Autocomplete custom KEY map Tabnine"
 inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 
 "FZF finder"
 noremap <C-P> :GFiles<CR>
+"Busqueda de texto en el archivo actual"
 noremap <Leader>bl :BLines<CR>
-noremap <Leader>rg :Rg<CR>
+"Busqueda de texto globalmente"
+noremap <Leader>rg :Rg<CR> 
+noremap <Leader>l :Buffers<CR>
+
+" Buffers
+nmap <Leader>n :bnext<CR>
+nmap <Leader>p :bprev<CR>
+nmap <Leader>x :bdelete<CR>
+" nmap <Leader>l :ls<CR>
+" nmap <Leader>bb :buffers<CR>
+
 
 " easymotion
 nmap <Leader>s <Plug>(easymotion-s2)
@@ -179,28 +202,20 @@ nmap <Leader>nt :NERDTreeFind<CR>
 let NERDTreeQuitOnOpen=1
 let NERDTreeShowHidden=1
 
-
 " Atajos personalizados
 nmap <Leader>w :w<CR>
 nmap <Leader>q :q<CR>
-nmap <Leader>qq :q!<CR>
-nmap <Leader>wq :wq<CR>
+nmap <Leader>Q :q!<CR>
+nmap <Leader>W :wq<CR>
 
-" Buffers
-nmap <Leader>n :bnext<CR>
-nmap <Leader>bb :buffers<CR>
-nmap <Leader>x :buffer
-nmap <Leader>p :bprev<CR>
-nmap <Leader>bd :bdelete<CR>
-nmap <Leader>l :ls<CR>
 
 "Activar tabnine"
 let g:coc_global_extensions = ['coc-tabnine'] 
 
 " Redimensionar ventanas
 nmap <Leader>wr :WinResizerStartResize<CR>
-let g:winresizer_horiz_resize = 1
-let g:winresizer_vert_resize = 1
+let g:winresizer_horiz_resize = 2
+let g:winresizer_vert_resize = 2
 "para que dejar el comando control + e como socroll down"
 let g:winresizer_start_key = '<C-R>'
 "nmap <C-w><C-r>wr :WinResizerStartResize<CR><CR>
@@ -273,12 +288,12 @@ inoremap ( ()<left>
 " inoremap (, (),<left><left>
 
 "autoclose and position cursor after  
-inoremap '<tab> ''  
-inoremap `<tab> ``  
-inoremap "<tab> ""
-inoremap (<tab> ()  
-inoremap [<tab> []  
-inoremap {<tab> {}  
+"inoremap '<tab> ''  
+"inoremap `<tab> ``  
+"inoremap "<tab> ""
+"inoremap (<tab> ()  
+"inoremap [<tab> []  
+"inoremap {<tab> {}  
 
 "autoclose with ; and position cursor after  
 " inoremap ';<tab> '';  
@@ -297,12 +312,12 @@ inoremap {<tab> {}
 " inoremap {,<tab> {},  
 
 "autoclose 2 lines below and position cursor in the middle   
-inoremap '<CR> '<CR>'<ESC>O  
-inoremap `<CR> `<CR>`<ESC>O  
-inoremap "<CR> "<CR>"<ESC>O  
-inoremap (<CR> (<CR>)<ESC>O  
-inoremap [<CR> [<CR>]<ESC>O  
-inoremap {<CR> {<CR>}<ESC>O  
+"inoremap '<CR> '<CR>'<ESC>O  
+"inoremap `<CR> `<CR>`<ESC>O  
+"inoremap "<CR> "<CR>"<ESC>O  
+"inoremap (<CR> (<CR>)<ESC>O  
+"inoremap [<CR> [<CR>]<ESC>O  
+"inoremap {<CR> {<CR>}<ESC>O  
 
 "autoclose 2 lines below adding ; and position cursor in the middle   
 " inoremap ';<CR> '<CR>';<ESC>O  
@@ -342,3 +357,9 @@ vnoremap S :<c-u>execute "normal! gUw"<cr>gv
 "inoremap <div<Char-62> <div></div><left><left><left><left><left><left>
 "inoremap <div<Char-62><Char-62> <div><CR></div><ESC>O
 
+"neoterm"
+set nocompatible
+filetype off
+let &runtimepath.=',~/.vim/bundle/neoterm'
+filetype plugin on
+let g:neoterm_default_mod='vertical'
