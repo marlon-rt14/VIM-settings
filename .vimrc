@@ -1,31 +1,31 @@
- set number
- set mouse=a
- set numberwidth=1
- set clipboard=unnamed
- syntax enable
- set showcmd
- set ruler
+set number
+set mouse=a
+set numberwidth=1
+set clipboard=unnamed
+syntax enable
+set showcmd
+set ruler
 "set cursorline
- set encoding=utf-8
- set showmatch
- set sw=2
- set softtabstop=2
- set relativenumber
- set laststatus=2
- set noshowmode
- set autoindent
- set cindent
- set smartindent
- set splitright
- set splitbelow
- set tabline=%<%t\ %h%m%r%=%D(%l/%L,%c%V) "habilitar pestanias"
- set foldmethod=indent
- set foldlevelstart=99
- set foldcolumn=2
- "Guardar el collapso o vista de los archivos para que se vuelvan a abrir como
- "antes"
-autocmd BufWinLeave * mkview
-autocmd BufWinEnter * silent! loadview
+set encoding=utf-8
+set showmatch
+set sw=2
+set softtabstop=2
+set relativenumber
+set laststatus=2
+set noshowmode
+set autoindent
+set cindent
+set smartindent
+set splitright
+set splitbelow
+set tabline=%<%t\ %h%m%r%=%D(%l/%L,%c%V) "habilitar pestanias"
+set foldmethod=indent
+set foldlevelstart=99
+set foldcolumn=2
+"Guardar el collapso o vista de los archivos para que se vuelvan a abrir como
+"antes"
+" autocmd BufWinLeave * mkview
+" autocmd BufWinEnter * silent! loadview
 
 
 set termguicolors
@@ -41,7 +41,7 @@ hi Normal ctermbg=none guibg=none
 call plug#begin('~/.vim/plugged')
 
 "Autocomplete"
- Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Themes
 " Plug 'tomasr/molokai'
@@ -49,7 +49,7 @@ call plug#begin('~/.vim/plugged')
 " Plug 'nanotech/jellybeans.vim'
 " Plug 'ayu-theme/ayu-vim' 
 " Plug 'danilo-augusto/vim-afterglow'
- Plug 'ray-x/aurora'
+Plug 'ray-x/aurora'
 "Plug 'ryanoasis/vim-devicons'
 
 " IDE
@@ -68,6 +68,9 @@ Plug 'ap/vim-css-color'
 
 "surround"
 Plug 'tpope/vim-surround'
+
+"Codeium"
+Plug 'Exafunction/codeium.vim'
 
 "Busca archivos"
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -168,7 +171,7 @@ noremap <A-w> :tabclose<CR>
 noremap <Leader>t :Tnew<CR>
 
 "SnipMate deprecate"
- let g:snipMate = { 'snippet_version' : 1 }
+let g:snipMate = { 'snippet_version' : 1 }
 
 "vim-commentary"
 autocmd FileType javascript setlocal commentstring={/*\ %s\ */}
