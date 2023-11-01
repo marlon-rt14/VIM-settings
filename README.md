@@ -14,6 +14,7 @@ ln -s .config/.vimrc
 ```
 
 ## Requerimientos
-* Tener instalado `yarn` y `npm` 
+* Tener instalado `yarn` y `npm`
+* Hay que instalar `vim-pathogen` por separado, fuera del vimrc
 
 
