@@ -249,11 +249,12 @@ nmap <Leader>W :wq<CR>
 
 "Instalar extensiones COC"
 "pending coc-pylsp coc-ruff
-let g:coc_global_extensions = ['coc-tabnine', 'coc-java', 'coc-emmet', 'coc-eslint', 'coc-graphql','coc-yaml', 'coc-docker', 'coc-html-css-support', 'coc-htmlhint', 'coc-json', 'coc-html', 'coc-css', 'coc-tsserver', 'coc-python', 'coc-pyright', 'coc-jedi',] 
+"es necesario archivo de configuracion en el proyecto que se trabaje coc-graphql
+let g:coc_global_extensions = ['coc-tabnine', 'coc-snippets', 'coc-java', 'coc-emmet', 'coc-eslint', 'coc-yaml', 'coc-docker', 'coc-html-css-support', 'coc-htmlhint', 'coc-json', 'coc-html', 'coc-css', 'coc-tsserver', 'coc-python', 'coc-pyright', 'coc-jedi',] 
 
 " Redimensionar ventanas
 nmap <Leader>wr :WinResizerStartResize<CR>
-let g:winresizer_horiz_resize = 3
+let g:winresizer_horiz_resize = 1
 let g:winresizer_vert_resize = 3
 "para que dejar el comando control + e como socroll down"
 let g:winresizer_start_key = '<C-R>'
