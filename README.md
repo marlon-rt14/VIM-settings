@@ -14,6 +14,6 @@ ln -s .config/.vimrc
 ```
 
 ## Requerimientos
-* Tener instalado `yanr` y `npm` 
+* Tener instalado `yarn` y `npm` 
 
 
