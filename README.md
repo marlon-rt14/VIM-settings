@@ -6,6 +6,14 @@ Seguir la siguiente estructura
 .config/.vimrc
 
 Crear enlaces simbolicos en la raiz
+```sh
 ln -s .config/.vim
+```
+```sh
 ln -s .config/.vimrc
+```
+
+## Requerimientos
+* Tener instalado `yanr` y `npm` 
+
 
