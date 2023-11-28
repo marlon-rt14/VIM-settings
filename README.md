@@ -16,5 +16,6 @@ ln -s .config/.vimrc
 ## Requerimientos
 * Tener instalado `yarn` y `npm`
 * Hay que instalar `vim-pathogen` por separado, fuera del vimrc
+* `sudo apt-get install ripgrep` para la busqueda global de texto en todo el proyecto   
 
 
