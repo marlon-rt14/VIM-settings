@@ -1,17 +1,20 @@
+syntax on
+filetype plugin indent on
+
 set number
+" set numberwidth=1
+" set relativenumber
 set mouse=a
-set numberwidth=1
 set clipboard=unnamed
-syntax enable
+" syntax enable
 set showcmd
 set ruler
-"set cursorline
+" set cursorline
 set encoding=utf-8
 set showmatch
 set sw=2
 set softtabstop=2
-set relativenumber
-set laststatus=2
+set laststatus=2 "Muestra informacion sobre la barra de esado como el numero de linea, nombre del archivo"
 set noshowmode
 set autoindent
 set cindent
@@ -19,8 +22,8 @@ set smartindent
 set splitright
 set splitbelow
 set tabline=%<%t\ %h%m%r%=%D(%l/%L,%c%V) "habilitar pestanias"
-set foldmethod=indent
-set foldlevelstart=99
+set foldmethod=syntax "[syntax, indent, expr, marker, manual]"
+set foldlevelstart=6
 set foldcolumn=2
 "Guardar el collapso o vista de los archivos para que se vuelvan a abrir como
 "antes"
@@ -46,11 +49,13 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Themes
 " Plug 'tomasr/molokai'
 " Plug 'dracula/vim'
-" Plug 'nanotech/jellybeans.vim'
-" Plug 'ayu-theme/ayu-vim' 
-" Plug 'danilo-augusto/vim-afterglow'
+Plug 'nanotech/jellybeans.vim'
+Plug 'navarasu/onedark.nvim'
+Plug 'ayu-theme/ayu-vim' 
+Plug 'danilo-augusto/vim-afterglow'
 Plug 'ray-x/aurora'
-"Plug 'ryanoasis/vim-devicons'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " IDE
 Plug 'easymotion/vim-easymotion'
@@ -66,6 +71,38 @@ Plug 'ap/vim-css-color'
 
 "####################################################################"
 
+"Git"
+Plug 'tpope/vim-fugitive'
+
+"GitGutter"
+Plug 'airblade/vim-gitgutter'
+
+"Visuzlize Git branch"
+""Plug 'rbong/vim-flog'
+
+"Indent Guides"
+""Plug 'nathanaelkane/vim-indent-guides'
+
+"Mostrar los buffers en flecha"
+Plug 'powerline/powerline'
+
+
+"Icons"
+Plug 'ryanoasis/vim-devicons'
+
+"json to ts"
+" Plug 'leafgarland/typescript-vim'
+
+"perzonalizacion"
+Plug 'RRethy/vim-illuminate' 
+
+
+
+
+"Ver errores de python en tiempo real"
+
+"#################################################################"
+
 "surround"
 Plug 'tpope/vim-surround'
 
@@ -76,8 +113,6 @@ Plug 'Exafunction/codeium.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 
 " Ident lines, mostrar una linea de guia en el scope"
 Plug 'Yggdroot/indentLine' 
@@ -104,7 +139,10 @@ Plug 'kassio/neoterm'
 "formatear e identar codigo"
 Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
 "ver los error en a lado del codigo"
+"js
 Plug 'dense-analysis/ale' 
+"python
+Plug 'davidhalter/jedi-vim'
 "Snippets"
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
@@ -122,13 +160,21 @@ let mapleader=" "
 "colorscheme ayu
 "let ayucolor='dark'
 
-" # jellybeans 
+" jellybeans 
 "colorscheme jellybeans
 
-" # aurora 
+" aurora 
 colorscheme aurora
 
-" # afterglow
+
+" tokyonight 
+"let g:onedark_config = {
+"    \ 'style': 'deep',
+"    \ 'transparent': v:true,
+"\}
+"colorscheme onedark
+
+" afterglow
 "colorscheme afterglow
 "let g:airline_theme = 'afterglow'
 "$ Usar esta opcion si el entorno como una oficina causa deslumbramiento, esta
@@ -137,18 +183,26 @@ colorscheme aurora
 "let g:afterglow_inherit_background=1
 "let g:afterglow_italic_comments=1
 
-" Ident Line Setup
-" let g:indentLine_setColors = 0
-" Vim and GVim
-let g:indentLine_char = '│'
-let g:indentLine_color_gui = '#555555'
-" let g:indentLine_bgcolor_gui = '#FF5F00'
 
+"EXTENSIONES"
+" Ident Line Setup
+"let g:indentLine_setColors = 0
+"let g:indentLine_char = '│'
+let g:indentLine_char = "'"
+"let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+let g:indentLine_defaultGroup = 'SpecialKey'
+let g:indentLine_color_gui = '#555555'
+"let g:indentLine_bgcolor_gui = '#FF5F00'
 
 "vim airline
+"para ver en forma de flecha hay que instalar vim-pathogen"
+"let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
-"let g:airline#extensions#tabline#left_sep = ' '
-"let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+" let g:airline#extensions#tabline#left_sep = ' '
+" let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline_powerline_fonts = 1 "activar la fuente para ver en flecha"
+"let g:airline_statusline_ontop=1
 "let g:airline_section_z = ''
 "let g:airline_section_y = ''
 " Personalizar la sección Z de la barra de estado
@@ -157,7 +211,8 @@ let g:airline_section_z_padding = 2
 "let g:airline_section_y = expand("%:e")
 let g:airline_section_y = '%{strftime("%H:%M")}'
 "behelit bubblegum kolor "
-let g:airline_theme='kolor'
+" let g:airline_theme='behelit'
+let g:airline_theme='deus'
 
 "Configuracion de pestanias"
 noremap <A-j> :tabprevious<CR>
@@ -181,6 +236,10 @@ vmap . <Plug>Commentary
 "Autocomplete custom KEY map Tabnine"
 inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 
+
+" Configuración específica de coc-tabnine
+let g:coc_tabnine_key = '<C-Space>'
+
 "FZF finder"
 noremap <C-P> :GFiles<CR>
 "Busqueda de texto en el archivo actual"
@@ -190,8 +249,8 @@ noremap <Leader>rg :Rg<CR>
 noremap <Leader>l :Buffers<CR>
 
 " Buffers
-nmap <Leader>n :bnext<CR>
-nmap <Leader>p :bprev<CR>
+"nmap <Leader>n :bnext<CR>
+"nmap <Leader>p :bprev<CR>
 nmap <Leader>x :bdelete<CR>
 " nmap <Leader>l :ls<CR>
 " nmap <Leader>bb :buffers<CR>
@@ -212,13 +271,15 @@ nmap <Leader>Q :q!<CR>
 nmap <Leader>W :wq<CR>
 
 
-"Activar tabnine"
-let g:coc_global_extensions = ['coc-tabnine'] 
+"Instalar extensiones COC"
+"pending coc-pylsp coc-ruff
+"es necesario archivo de configuracion en el proyecto que se trabaje coc-graphql
+let g:coc_global_extensions = ['coc-tabnine', 'coc-snippets', 'coc-java', 'coc-emmet', 'coc-eslint', 'coc-yaml', 'coc-docker', 'coc-html-css-support', 'coc-htmlhint', 'coc-json', 'coc-html', 'coc-css', 'coc-tsserver', 'coc-python', 'coc-pyright', 'coc-jedi',] 
 
 " Redimensionar ventanas
 nmap <Leader>wr :WinResizerStartResize<CR>
-let g:winresizer_horiz_resize = 2
-let g:winresizer_vert_resize = 2
+let g:winresizer_horiz_resize = 1
+let g:winresizer_vert_resize = 3
 "para que dejar el comando control + e como socroll down"
 let g:winresizer_start_key = '<C-R>'
 "nmap <C-w><C-r>wr :WinResizerStartResize<CR><CR>
@@ -258,7 +319,7 @@ vnoremap <C-Y> :'<,'>w !xclip -selection clipboard<CR>
 "vim-prettier formatear documento"
 nnoremap <Leader>fa :Prettier<CR>:w<CR>
 vnoremap <Leader>ff :PrettierFragment<CR>:w<CR>
-let g:prettier#autoformat = 1
+let g:prettier#autoformat = 0
 let g:prettier#autoformat_require_pragma = 0
 "let g:prettier#config#print_width = 80
 let g:prettier#config#tab_width = &softtabstop
@@ -346,11 +407,21 @@ inoremap <C-Del> <C-o>dw
 " Eliminar una palabra hacia atras desde el cursor con: ctrl + del
 inoremap <Char-8> <C-W>
 
-"Saltar una linea abajo sin separar la linea actual: shift + m 
+"Saltar una linea abajo sin separar la linea actual: ctrl + enter 
 imap <C-L> <C-o>o
 
+"Formatear el codigo"
+"inoremap <A-f><A-f> <Esc>:call feedkeys(":Prettier\<CR>")<CR>
+inoremap <A-f><A-f> <Esc>:execute "Prettier"<CR>a
+nnoremap <A-f><A-f> :Prettier<CR>
+
+
 "Duplicar la lina actual"
-nmap <Leader>d :t.<CR>
+" nmap <Leader>d :t.<CR>
+"nmap <M-d> :t.<CR>
+nnoremap <M-d> :<C-u>normal! yyp<CR>
+inoremap <M-d> <C-o>:<C-u>normal! yyp<CR>
+
 
 "Convertir a mayuscula, minuscula y oracion"
 vnoremap U :<c-u>execute "normal! gU"<cr>gv
@@ -366,3 +437,19 @@ filetype off
 let &runtimepath.=',~/.vim/bundle/neoterm'
 filetype plugin on
 let g:neoterm_default_mod='vertical'
+""let g:neoterm_autoscroll=1
+
+"ALE"
+"let g:ale_python_pylint_executable = '~/.local/bin/pylint'
+"let g:ale_python_pylint_executable = '~/.local/bin/flake8'
+
+
+"HELP"
+" Surround: Visual mode: S + <wrapper>
+" example: S + {
+" FOLD 
+" zM => plegar todo el archivo 
+" zR => desplegar todo el archivo 
+" zj => moverse hacia el siguiente pliegue hacia abajo
+" zk => moverse hacia el siguiente pliegue hacia arriba
+" za => alternar los pliegues
